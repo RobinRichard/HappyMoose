@@ -1,15 +1,27 @@
-# File Upload (Happy Moose)
+# Photo Upload (Happy Moose Internship)
 
-This ReactNative App allows the user to select photo from their mobile gallery and upload it to the server
+This project contains two application
+    1. A file server which stores the uploaded photos develeoped using Django framework
+    2. Mobile App that allows the user to upload photos from their mobile gallery to the server developed using React Native
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
+```
+1. Clone the repo
+2. cd HappyMoose
+```
+### To run the django server
+```
+1. cd happyMoose (Django web application)
+2. pip install -r requirements.txt
+3. python manage.py runserver
+```
+### To run react native app
+```
+1. cd Moose (Native mobile application)
+2. npm install
+3. react-native run-server
 ```
 Give examples
 ```
@@ -32,25 +44,6 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
@@ -58,9 +51,8 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Django](https://docs.djangoproject.com/en/2.1/intro/) - The web framework used
+* [React Native](https://facebook.github.io/react-native/docs/getting-started.html) - Build native mobile apps using JavaScript and React
 
 ## Contributing
 
@@ -72,7 +64,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Robin Richard Arulanantham** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
@@ -80,9 +72,4 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
