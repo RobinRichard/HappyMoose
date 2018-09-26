@@ -1,6 +1,6 @@
-# Project Title
+# File Upload (Happy Moose)
 
-One Paragraph of project description goes here
+This ReactNative App allows the user to select photo from their mobile gallery and upload it to the server
 
 ## Getting Started
 
