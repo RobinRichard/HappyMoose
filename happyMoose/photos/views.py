@@ -17,31 +17,31 @@ def index(request):
 
 @csrf_exempt
 def apiuploads(request):
-    # try:
-    if request.method == 'POST' and request.FILES['image']:
-        myfile = request.FILES['image']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
+    try:
+        if request.method == 'POST' and request.FILES['image']:
+            myfile = request.FILES['image']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
 
-        f = Photo.objects.create(file_name=myfile.name,
-                                  Actual_name=uploaded_file_url,
-                                )
-        
+            f = Photo.objects.create(file_name=myfile.name,
+                                    Actual_name=uploaded_file_url,
+                                    )
+            
+            response_data = {}
+            response_data['flag'] = "1"
+            response_data['result'] = "worked"
+            return HttpResponse(json.dumps(response_data), content_type="application/json")
+    except:
         response_data = {}
-        response_data['flag'] = "1"
-        response_data['result'] = "worked"
+        response_data['flag'] = "0"
+        response_data['result'] = "Error in getting Date"
         return HttpResponse(json.dumps(response_data), content_type="application/json")
-    # except:
-    #     response_data = {}
-    #     response_data['flag'] = "0"
-    #     response_data['result'] = "Error in getting Date"
-    #     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 def photoList(request):
     if request.method == "GET":
         rest_list = {}
-        ph = Photo.objects.all()
+        ph = Photo.objects.all().order_by('-uploadDate')
         phSer = serializer.PhotoSerializer(ph, many=True)
 
         rest_list['photos'] = phSer.data

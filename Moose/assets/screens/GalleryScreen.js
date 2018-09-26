@@ -15,7 +15,6 @@ class Gallery extends Component {
     }
     componentWillMount() {
         this.FetchDate()
-
     }
 
     FetchDate() {
@@ -34,13 +33,14 @@ class Gallery extends Component {
                 alert(error)
             });
     }
-    ShowModalFunction(visible, imageURL) {
 
+    ShowImage(visible, imageURL) {
         this.setState({
             ModalVisibleStatus: visible,
             TempImageURL: imageURL
         });
     }
+
     refresh() {
         this.setState({
             isLoading: true,
@@ -52,13 +52,14 @@ class Gallery extends Component {
         if (this.state.isLoading) {
             return (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <ActivityIndicator size="large" />
+                    <ActivityIndicator />
                 </View>
             );
         }
         return (
-            <View style={styles.MainContainer}>
-                <Header style={{ backgroundColor: '#fe9e1f' }}>
+            <SafeAreaView style={styles.MainContainer}>
+             <StatusBar backgroundColor='#fe9e1f' barStyle='light-content' />
+                <Header  style={{ backgroundColor: '#fe9e1f' }}>
                     <Left>
                         <Button transparent>
                             <Image source={require('../Images/logo.png')} />
@@ -79,7 +80,7 @@ class Gallery extends Component {
                     data={this.state.photoData}
                     renderItem={({ item }) =>
                         <View style={{ flex: 1, flexDirection: 'column', margin: 5 }}>
-                            <TouchableOpacity onPress={this.ShowModalFunction.bind(this, true, 'http://10.0.2.2:8000' + item.Actual_name)} >
+                            <TouchableOpacity onPress={this.ShowImage.bind(this, true, 'http://10.0.2.2:8000' + item.Actual_name)} >
                                 <Image style={styles.imageThumbnail} source={{ uri: 'http://10.0.2.2:8000' + item.Actual_name }} />
                             </TouchableOpacity>
                         </View>
@@ -87,74 +88,54 @@ class Gallery extends Component {
                     numColumns={2}
                     keyExtractor={(item, index) => index}
                 />
-                {
-                    this.state.ModalVisibleStatus
-                        ?
-                        (
-                            <Modal
-                                transparent={false}
-                                animationType={"fade"}
-                                visible={this.state.ModalVisibleStatus}
-                                onRequestClose={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus) }} >
-                                <View style={styles.modalView}>
-                                    <Image style={styles.mainImage} source={{ uri: this.state.TempImageURL }} />
-                                    <TouchableOpacity
-                                        activeOpacity={0.5}
-                                        style={styles.TouchableOpacity_Style}
-                                        onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus) }} >
-                                        <Icon type="FontAwesome" style={{ fontSize: 24 }} name="times" />
-                                    </TouchableOpacity>
-                                </View>
-                            </Modal>
-                        )
-                        :
-                        null
+                {this.state.ModalVisibleStatus?
+                   (<Modal
+                        transparent={false}
+                        animationType={"fade"}
+                        visible={this.state.ModalVisibleStatus}
+                        onRequestClose={() => { this.ShowImage(!this.state.ModalVisibleStatus) }} >
+                        <View style={styles.modalView}>
+                            <Image style={styles.mainImage} source={{ uri: this.state.TempImageURL }} />
+                            <TouchableOpacity
+                                activeOpacity={0.5}
+                                style={styles.TouchableOpacity_Style}
+                                onPress={() => { this.ShowImage(!this.state.ModalVisibleStatus) }} >
+                                <Icon type="FontAwesome" style={{ fontSize: 24 }} name="times" />
+                            </TouchableOpacity>
+                        </View>
+                    </Modal>): null
                 }
-            </View>
+            </SafeAreaView>
         );
     }
 }
 export default Gallery;
 
 const styles = StyleSheet.create({
-
     MainContainer: {
-
         justifyContent: 'center',
         flex: 1,
         paddingTop: (Platform.OS) === 'ios' ? 20 : 0
-
     },
-
     imageThumbnail: {
-
         justifyContent: 'center',
         alignItems: 'center',
         height: 150
-
     },
-
     mainImage: {
-
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
         width: '98%',
         resizeMode: 'contain'
-
     },
-
     modalView: {
-
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0.4)'
-
     },
-
     TouchableOpacity_Style: {
-
         width: 25,
         height: 25,
         top: 9,
@@ -162,6 +143,4 @@ const styles = StyleSheet.create({
         position: 'absolute'
 
     }
-
-
 });

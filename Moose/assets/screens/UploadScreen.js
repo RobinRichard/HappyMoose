@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet,Button, Text, View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+
+import { Button, Text } from 'native-base';
 
 import ImagePicker from "react-native-image-picker";
 import RNFetchBlob from 'rn-fetch-blob';
@@ -72,13 +74,13 @@ class Upload extends Component {
                 <Image style={{ width: '80%', height: '50%' }} source={this.state.imageSource != null ? this.state.imageSource :
                     require('../Images/default.jpeg')}>
                 </Image>
-                <View style={{ flexDirection: 'row',padding:10,justifyContent:'space-between' }}>
+                <View style={{ flexDirection: 'row',padding:10,width:'100%',justifyContent:'center', alignItems: 'center' }}>
                     
-                    {this.state.imageSource==null?<Button title="Select" onPress={this.selectPhoto.bind(this)}  color="#fe9e1f" />:null}
+                    {this.state.imageSource==null?<Button  onPress={this.selectPhoto.bind(this)} style={{ margin:5}}  warning><Text>Select</Text></Button>:null}
 
-                    {this.state.imageSource!=null?<Button title="Clear" onPress={this.RemovePhoto.bind(this)}  color="#fe9e1f" />:null}
+                    {this.state.imageSource!=null?<Button onPress={this.RemovePhoto.bind(this)} style={{ margin:5}}  danger><Text>Clear</Text></Button>:null}
 
-                    {this.state.imageSource!=null?<Button title="upload" onPress={this.uploadPhoto.bind(this)} color="#fe9e1f" /> :null}
+                    {this.state.imageSource!=null?<Button onPress={this.uploadPhoto.bind(this)} style={{ margin:5}} info><Text>Upload</Text></Button> :null}
                     </View>
             </SafeAreaView>
         );

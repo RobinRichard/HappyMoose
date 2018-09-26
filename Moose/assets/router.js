@@ -27,7 +27,7 @@ export const bottomNav = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Upload',
       tabBarIcon: ({ tintColor }) => (
-        <Icon type="FontAwesome" style={{ color: tintColor,fontSize:24 }} name="user" />
+        <Icon type="FontAwesome" style={{ color: tintColor,fontSize:24 }} name="cloud-upload" />
       )
     }
   }
