@@ -36,7 +36,7 @@ This project is a client-server application. The server develeoped using Django 
 ```
 
 
-## Deployment
+## Things to remember
 
 First run the Django application (server) and then use the Android emulator to run the react native application (cliemt) in same system so that the API connection will work properly.
 
