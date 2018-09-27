@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Platform, FlatList, ActivityIndicator, Modal, StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, StatusBar, Animated, Dimensions, SafeAreaView } from 'react-native';
-
-import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
-
+import { Platform, FlatList, ActivityIndicator, Modal, StyleSheet,ToastAndroid,  View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
 
 class Gallery extends Component {
     constructor() {
@@ -14,10 +12,28 @@ class Gallery extends Component {
         }
     }
     componentWillMount() {
-        this.FetchDate()
+        this.props.navigation.addListener('didFocus', () => this.isFocused())
+        this.props.navigation.addListener('didBlur', () => this.isBlur())
     }
 
+
+    isFocused = () => {
+        setTimeout(() => {
+            this.FetchDate()
+        }, 500)
+
+      };
+    
+    isBlur = () => {
+        this.setState({
+            isLoading: true,
+        });
+      };
+
     FetchDate() {
+        this.setState({
+            isLoading: true,
+        });
         return fetch('http://10.0.2.2:8000/photoList')
             .then((response) => response.json())
             .then((responseJson) => {
@@ -30,7 +46,11 @@ class Gallery extends Component {
                 });
             })
             .catch((error) => {
-                alert(error)
+                ToastAndroid.showWithGravity(
+                    'Server error : ' + error,
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                );
             });
     }
 
@@ -42,23 +62,20 @@ class Gallery extends Component {
     }
 
     refresh() {
-        this.setState({
-            isLoading: true,
-        });
         this.FetchDate()
     }
 
     render() {
         if (this.state.isLoading) {
             return (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <ActivityIndicator />
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                     <Image style={{ height: 60, width: 60,marginBottom:20 }}source={require('../Images/logo.png')} />
+                    <ActivityIndicator size="large" color="#fe9e1f" />
                 </View>
             );
         }
         return (
             <SafeAreaView style={styles.MainContainer}>
-             <StatusBar backgroundColor='#fe9e1f' barStyle='light-content' />
                 <Header  style={{ backgroundColor: '#fe9e1f' }}>
                     <Left>
                         <Button transparent>
@@ -90,7 +107,7 @@ class Gallery extends Component {
                 />
                 {this.state.ModalVisibleStatus?
                    (<Modal
-                        transparent={false}
+                        transparent={true}
                         animationType={"fade"}
                         visible={this.state.ModalVisibleStatus}
                         onRequestClose={() => { this.ShowImage(!this.state.ModalVisibleStatus) }} >
@@ -100,7 +117,7 @@ class Gallery extends Component {
                                 activeOpacity={0.5}
                                 style={styles.TouchableOpacity_Style}
                                 onPress={() => { this.ShowImage(!this.state.ModalVisibleStatus) }} >
-                                <Icon type="FontAwesome" style={{ fontSize: 24 }} name="times" />
+                                <Icon type="FontAwesome" style={{ fontSize: 30,color:'white' }} name="times" />
                             </TouchableOpacity>
                         </View>
                     </Modal>): null
@@ -133,7 +150,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.4)'
+        backgroundColor: 'rgba(0,0,0,0.8)'
     },
     TouchableOpacity_Style: {
         width: 25,

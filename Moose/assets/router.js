@@ -7,7 +7,6 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 import { Icon } from 'native-base';
-
 import Upload from "./screens/UploadScreen";
 import Gallery from './screens/GalleryScreen'
 
@@ -47,7 +46,8 @@ export const bottomNav = createBottomTabNavigator({
         borderBottomColor: '#dddddd',
         shadowOffset: { width: 5, height: 3 },
         shadowColor: 'black',
-        shadowOpacity: 0.5
+        shadowOpacity: 0.5,
+        zIndex:100
       }
     }
   });

@@ -14,6 +14,7 @@
     "react-native-image-gallery": "^2.1.5",
     "react-native-image-picker": "^0.26.10",
     "react-navigation": "^2.16.0",
+    "react-navigation-addons": "github:satya164/react-navigation-addons",
     "rn-fetch-blob": "^0.10.13"
   },
   "devDependencies": {

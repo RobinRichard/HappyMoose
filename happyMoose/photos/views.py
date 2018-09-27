@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from . import serializer
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return HttpResponse("Hello, world. You're at the happy Moose index.")
 
 @csrf_exempt
 def apiuploads(request):

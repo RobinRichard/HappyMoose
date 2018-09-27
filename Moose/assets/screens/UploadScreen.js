@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Image, ToastAndroid, SafeAreaView } from 'react-native';
 
 import { Button, Text } from 'native-base';
 
@@ -24,11 +24,12 @@ class Upload extends Component {
 
     selectPhoto() {
         ImagePicker.showImagePicker(options, (response) => {
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            }
-            else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+            if (response.error) {
+                ToastAndroid.showWithGravity(
+                    'ImagePicker Error : ' + response.error,
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                );
             }
             else {
                 let source = { uri: response.uri };
@@ -36,8 +37,8 @@ class Upload extends Component {
                 this.setState({
                     imageSource: source,
                     data: response.data,
-                    filetype:response.type,
-                    filename:response.fileName,
+                    filetype: response.type,
+                    filename: response.fileName,
                 });
             }
         });
@@ -54,18 +55,28 @@ class Upload extends Component {
                 { name: 'image', filename: this.state.filename, type: this.state.filetype, data: this.state.data }
 
             ]).then((resp) => {
-                alert('uploaded successfully')
-                 this.setState({
-       imageSource:null})
+                ToastAndroid.showWithGravity(
+                    'uploaded successfully',
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                );
+                this.setState({
+                    imageSource: null
+                })
             }).catch((err) => {
-                alert(err)
+                ToastAndroid.showWithGravity(
+                    'Server error : ' + err,
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                );
             })
 
     }
 
-    RemovePhoto(){
+    RemovePhoto() {
         this.setState({
-       imageSource:null})
+            imageSource: null
+        })
     }
     render() {
 
@@ -74,14 +85,14 @@ class Upload extends Component {
                 <Image style={{ width: '80%', height: '50%' }} source={this.state.imageSource != null ? this.state.imageSource :
                     require('../Images/default.jpeg')}>
                 </Image>
-                <View style={{ flexDirection: 'row',padding:10,width:'100%',justifyContent:'center', alignItems: 'center' }}>
-                    
-                    {this.state.imageSource==null?<Button  onPress={this.selectPhoto.bind(this)} style={{ margin:5}}  warning><Text>Select</Text></Button>:null}
+                <View style={{ flexDirection: 'row', padding: 10, width: '100%', justifyContent: 'center', alignItems: 'center' }}>
 
-                    {this.state.imageSource!=null?<Button onPress={this.RemovePhoto.bind(this)} style={{ margin:5}}  danger><Text>Clear</Text></Button>:null}
+                    {this.state.imageSource == null ? <Button onPress={this.selectPhoto.bind(this)} style={{ margin: 5 }} warning><Text>Select</Text></Button> : null}
 
-                    {this.state.imageSource!=null?<Button onPress={this.uploadPhoto.bind(this)} style={{ margin:5}} info><Text>Upload</Text></Button> :null}
-                    </View>
+                    {this.state.imageSource != null ? <Button onPress={this.RemovePhoto.bind(this)} style={{ margin: 5 }} danger><Text>Clear</Text></Button> : null}
+
+                    {this.state.imageSource != null ? <Button onPress={this.uploadPhoto.bind(this)} style={{ margin: 5 }} info><Text>Upload</Text></Button> : null}
+                </View>
             </SafeAreaView>
         );
     }
