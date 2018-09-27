@@ -4,7 +4,7 @@ This project is a client-server application. The server develeoped using Django 
 
 ## Screenshots
 
-<img src="/screenshot/screenshot.PNG" width="800" height="500" />
+<img src="/screenshot/screenshot.PNG" width="800" height="550" />
 
 ## Getting Started
 
