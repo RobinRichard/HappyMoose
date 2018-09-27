@@ -1,4 +1,4 @@
-# Photo Upload (Happy Moose Internship)
+# Photo Upload Application
 
 This project is a client-server application. The server develeoped using Django framework stores the uploaded photos and provides an API for react native client. The mobile application developed using React Native is the client that allows the user to select photos from their mobile phone and uploads it to server. The setup to run the project is given below. 
 
