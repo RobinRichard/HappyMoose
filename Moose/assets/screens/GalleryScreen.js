@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Platform, FlatList, ActivityIndicator, Modal, StyleSheet,ToastAndroid,  View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Platform,YellowBox, FlatList, ActivityIndicator, Modal, StyleSheet,ToastAndroid,  View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
 
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated'])
 class Gallery extends Component {
     constructor() {
         super()
