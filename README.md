@@ -2,7 +2,7 @@
 
 This project is a client-server application. The server develeoped using Django framework stores the uploaded photos and provides an API for react native client. The mobile application developed using React Native is the client that allows the user to select photos from their mobile phone and uploads it to server. To run the project please see the instructions given below the screenshots. 
 
-## Screen Shots
+## Screenshots
 
 <img src="/screenshot/screenshot.PNG" width="800" height="500" />
 
