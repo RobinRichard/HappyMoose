@@ -1,6 +1,6 @@
 # Photo Upload (Happy Moose Internship)
 
-This project contains two applications. One is a server which stores the uploaded photos and serve api for react native application (develeoped using Django framework) another Mobile application that allows the user to select photos from their mobile and upload it to django server using api (developed using React Native)
+This project is a client-server application. The server develeoped using Django framework stores the uploaded photos and provides an API for react native client. The mobile application developed using React Native is the client that allows the user to select photos from their mobile phone and uploads it to server. The setup to run the project is given below. 
 
 ## Getting Started
 
@@ -34,7 +34,7 @@ This project contains two applications. One is a server which stores the uploade
 
 ## Deployment
 
-First run django application and then use emulator to run the react native application in same system so that the api connection will work properly
+First run the Django application (server) and then use the Android emulator to run the react native application (cliemt) in same system so that the API connection will work properly.
 
 ## Built With
 
